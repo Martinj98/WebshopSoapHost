@@ -7,6 +7,8 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import java.util.Random;
 
+import java.io.*;
+import java.util.concurrent.TimeUnit;
 @WebService
 @SOAPBinding()
 public class HelloWorld {
@@ -19,10 +21,13 @@ public class HelloWorld {
 	}
 
 	public int getUniekGetal(@WebParam(name = "adresId") int adres, @WebParam(name = "klantNaam") String klant,
-			@WebParam(name = "bedrag") int bedrag) {
+			@WebParam(name = "bedrag") int bedrag) throws InterruptedException {
 		LOG.info("AdresID: " + adres + "\n Van: " + klant + "\nBedrag: " + bedrag);
 		Random rand = new Random();
 		int uniekGetal = rand.nextInt(99999) + 1;
+		LOG.info("Waiting 30 sec start!");
+		TimeUnit.SECONDS.sleep(30);
+		LOG.info("Waiting 30 sec is over!");
 		return uniekGetal;
 	}
 }
